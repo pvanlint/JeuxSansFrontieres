@@ -1,0 +1,6 @@
+FROM    jeuxsf/fxserver
+
+COPY src/test.js /app/test.js
+
+ENTRYPOINT ["node", "/app/test.js"]
+

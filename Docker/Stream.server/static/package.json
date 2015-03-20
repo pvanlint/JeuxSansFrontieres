@@ -1,0 +1,14 @@
+{
+  "name": "fx",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Streaming fx rates app",
+  "main": "fx.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node fx.js"
+  },
+  "dependencies": {
+    "ws": "~0.7.1"
+  }
+}
