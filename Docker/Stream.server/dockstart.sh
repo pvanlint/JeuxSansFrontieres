@@ -5,14 +5,13 @@ docker build -t jeuxsf/fxserver .
 docker build -t jeuxsf/fxtest -f Dockerfile.test .
 
 echo "Starting server container"
-id=`docker run -d jeuxsf/fxserver`
-
-host=`docker inspect $id  | grep IPAddress | awk -F'"' '{print $4":3001";}'`
+id=`docker run -d jeuxsf/fxserver $1`
 
 sleep 10
 docker logs $id
-echo "Starting test, connecting to $host"
-testid=`docker run -d jeuxsf/fxtest $host`
+service=`docker logs $id | grep "Service: " | awk '{print $2;}'`
+echo "Starting test, connecting to $service"
+testid=`docker run -d jeuxsf/fxtest $service`
 docker logs -f $testid
 
 echo

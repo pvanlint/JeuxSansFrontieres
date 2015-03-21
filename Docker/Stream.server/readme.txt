@@ -1,8 +1,8 @@
-docker build -t pvl1/fx .
-docker build -f Dockerfile.2 -t pvl1/fx2 .
+docker build -t jeuxsf/fxserver .
+docker build -f Dockerfile.test -t jeuxsf/fxtest .
 
-docker run -it pvl1/fx
-docker run -d pvl1/fx2 3004
+docker run -d jeuxsf/fxserver 3004
+docker run -it jeuxsf/fxtest
 
 docker ps
 docker logs <did>

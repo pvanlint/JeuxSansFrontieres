@@ -55,13 +55,33 @@ function updates() {
     t_update.count++;
 }
 
+var os = require('os');
+var ifaces = os.networkInterfaces();
+
+function getIp() {
+    var ip;
+    Object.keys(ifaces).forEach(function (ifname) {
+        var alias = 0;
+
+        ifaces[ifname].forEach(function (iface) {
+            if ('IPv4' == iface.family && iface.internal == false && alias == 0) {
+                alias++;
+                ip = iface.address;
+            }
+        });
+    });
+    return ip;
+};
+
+
 var ctrl = setInterval(updates, 100);
 var running = true;
 
 var WebSocketServer = require('ws').Server;
 var wss = new WebSocketServer({port: port});
-console.log("Running on ", hostname);
-console.log("Listening on port ", port);
+var service = getIp() + ":" + port;
+console.log("Running on ", service, " - ", hostname, " for ", getIp());
+console.log("Service: ", service);
 
 wss.on('connection', function(ws) {
     var idx = connections.push(ws) - 1;

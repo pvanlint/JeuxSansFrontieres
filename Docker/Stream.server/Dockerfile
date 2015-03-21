@@ -10,9 +10,10 @@ COPY src/fx.cc /app/fx.cc
 RUN cd /app; node-gyp configure build
 
 COPY src/fx.js /app/fx.js
+COPY src/ip.js /app/ip.js
 
 
 #EXPOSE 3001
 #8300 8301 8301/udp 8302 8302/udp 8400 8500 53/udp
 
-CMD ["/app/launch.sh"]
+ENTRYPOINT ["/app/launch.sh"]
