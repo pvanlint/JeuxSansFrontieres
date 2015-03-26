@@ -5,7 +5,7 @@ docker build -t jeuxsf/fxserver .
 docker build -t jeuxsf/fxtest -f Dockerfile.test .
 
 echo "Starting server container"
-id=`docker run -d jeuxsf/fxserver $1`
+id=`docker run -d -p $1:$1 jeuxsf/fxserver $1`
 
 sleep 10
 docker logs $id

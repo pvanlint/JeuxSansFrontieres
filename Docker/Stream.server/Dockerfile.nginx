@@ -1,0 +1,5 @@
+FROM    nginx
+
+#ENTRYPOINT ["/usr/sbin/nginx"]
+#ENTRYPOINT ["/bin/bash"]
+

@@ -8,9 +8,11 @@ var WebSocket = require('ws');
 var ws = new WebSocket("ws://"+service);
 ws.onopen = function() {
   connected=true;
-  var ccy = "EURUSD";
-  console.log("Subscribing on open - " + ccy);
-  ws.send("Subscribe " + ccy);
+  var ccy1 = "EURUSD";
+  var ccy2 = "USDJPY";
+  console.log("Subscribing on open - " + ccy1 + " & " + ccy2);
+  ws.send("Subscribe " + ccy1);
+  ws.send("Subscribe " + ccy2);
   // Web Socket is connected, send data using send()
 };
 ws.onmessage = function (evt) {

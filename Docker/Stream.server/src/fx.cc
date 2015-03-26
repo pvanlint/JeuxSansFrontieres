@@ -4,6 +4,8 @@ using namespace v8;
 
 #include <string>
 #include <map>
+#include <cstdlib>
+#include <ctime>
 
 using namespace std;
 typedef map<string, double> RateMap;
@@ -16,12 +18,16 @@ void getRate(const FunctionCallbackInfo<Value>& args) {
 
     if (args.Length() > 0)
     {
-        string ccypair("GBPUSD");
+        v8::String::Utf8Value param(args[0]->ToString());
+        //string ccypair("GBPUSD");
+        string ccypair(*param);
         //string ccypair = val.ToString();
         RateMap::iterator it = fxrates.find(ccypair);
         if (it != fxrates.end())
         {
-            double rate = it->second +0.00001;
+            double rate = ((rand()%2)?
+                                it->second + 0.000001:
+                                it->second - 0.000001);
             it->second = rate;
             Local<Number> num = Number::New(isolate, rate);
             args.GetReturnValue().Set(num);
@@ -43,6 +49,7 @@ void getRate(const FunctionCallbackInfo<Value>& args) {
 }
 
 void Init(Handle<Object> exports) {
+    srand(time(0));
     fxrates.insert(RateMap::value_type("AUDUSD", 0.87968));
     fxrates.insert(RateMap::value_type("USDCAD", 1.123165));
     fxrates.insert(RateMap::value_type("USDCNY", 6.117300));
@@ -55,46 +62,3 @@ void Init(Handle<Object> exports) {
 
 NODE_MODULE(addon, Init)
 
-
-/*
-static Handle<Value> getRate(const Arguments& args)
-{
-//    Isolate* isolate = Isolate::GetCurrent();
-//    HandleScope scope(isolate);
-    HandleScope scope;
-    
-        v8::String::Utf8Value val(args[0]);
-        string ccypair("GBPUSD");
-        //string ccypair = val.ToString();
-        RateMap::iterator it = fxrates.find(ccypair);
-        if (it != fxrates.end())
-        {
-            double rate = it->second +0.00001;
-            it->second = rate;
-            //Local<Number> num = Number::New(isolate, rate);
-            Local<Number> num = Number::New(rate);
-            args.GetReturnValue().Set(num);
-        }
-        else
-        {
-            isolate->ThrowException(
-                Exception::TypeError(
-                    String::NewFromUtf8(isolate, "Currency pair not found")));
-        }
-    }
-    else
-    {
-        isolate->ThrowException(
-            Exception::TypeError(
-                String::NewFromUtf8(isolate, "Wrong number of arguments")));
-    }
-    return;
-}
-
- 
-extern "C" void init(Handle<Object> target)
-{
-    fxrates.insert(RateMap::value_type("AUDUSD", 0.87968));
-    NODE_SET_METHOD(target, "getRate", getRate);
-}
-*/

@@ -10,7 +10,6 @@ COPY src/fx.cc /app/fx.cc
 RUN cd /app; node-gyp configure build
 
 COPY src/fx.js /app/fx.js
-COPY src/ip.js /app/ip.js
 
 
 #EXPOSE 3001
