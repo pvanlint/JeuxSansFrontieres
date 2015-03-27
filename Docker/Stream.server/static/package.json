@@ -9,6 +9,7 @@
     "start": "node fx.js"
   },
   "dependencies": {
-    "ws": "~0.7.1"
+    "ws": "~0.7.1",
+    "newrelic": "~1.17.3"
   }
 }

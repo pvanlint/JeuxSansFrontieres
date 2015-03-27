@@ -1,3 +1,5 @@
+var nr = require('newrelic');
+
 var port = 3001;
 if (process.argv.length > 2)
 {
@@ -85,12 +87,14 @@ console.log("Service: ", service);
 
 wss.on('connection', function(ws) {
     var idx = connections.push(ws) - 1;
+    nr.incrementMetric('Custom/Connection');
     console.log(idx);
     ws.on('message', function(message) {
         var assets;
         console.log(idx + ': Received: %s', message);
         if (message.substr(0, 10) === "Subscribe ")
         {
+            nr.incrementMetric('Custom/Subscription');
             assets = message.substr(10).split(",");
             for (var i in assets) {
                 var asset = assets[i];
