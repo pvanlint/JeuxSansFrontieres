@@ -1,5 +1,11 @@
 #!/bin/bash
 
+if [[ $# -lt 1 ]]; then
+    echo "Usage: $0 <port>"
+    echo "example: $0 3001"
+    exit -1
+fi
+
 echo "Building containers"
 docker build -t jeuxsf/fxserver .
 docker build -t jeuxsf/fxtest -f Dockerfile.test .
