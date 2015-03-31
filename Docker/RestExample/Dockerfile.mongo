@@ -1,0 +1,6 @@
+FROM    dockerfile/mongodb
+
+COPY data /data
+COPY src/load.sh /
+
+ENTRYPOINT ["/load.sh"]

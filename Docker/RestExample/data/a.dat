@@ -1,0 +1,9 @@
+use app
+
+db.users.insert(
+    [
+        { name: "Paul Vanlint", email: "paul@polyzing.com", age: 45 },
+        { name: "John Doe", email: "john.doe@example.com", age: 36 }
+    ]
+)
+
