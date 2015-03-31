@@ -8,7 +8,6 @@ if (process.argv.length > 2)
 }
 
 var connections=[];
-var eurusd_conns=[];
 
 var os = require("os");
 var hostname = os.hostname();
