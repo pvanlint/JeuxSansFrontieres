@@ -27,7 +27,7 @@ var currency = {
 var t_update = {
     "sum":0,
     "count":0
-}
+};
 
 var addon = require('./build/Release/addon');
 
@@ -67,14 +67,14 @@ function getIp() {
         var alias = 0;
 
         ifaces[ifname].forEach(function (iface) {
-            if ('IPv4' == iface.family && iface.internal == false && alias == 0) {
+            if ('IPv4' === iface.family && iface.internal === false && alias === 0) {
                 alias++;
                 ip = iface.address;
             }
         });
     });
     return ip;
-};
+}
 
 
 var ctrl = setInterval(updates, 100);
