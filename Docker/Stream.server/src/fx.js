@@ -92,13 +92,14 @@ wss.on('connection', function(ws) {
     console.log(idx);
     ws.on('message', function(message) {
         var assets;
+        var asset;
         console.log(idx + ': Received: %s', message);
         if (message.substr(0, 10) === "Subscribe ")
         {
             nr.incrementMetric('Custom/Subscription');
             assets = message.substr(10).split(",");
             for (var i in assets) {
-                var asset = assets[i];
+                asset = assets[i];
                 ws.send('Subscribed '+asset+' on '+hostname);
                 if (currency[asset] !== undefined)
                 {
@@ -116,7 +117,7 @@ wss.on('connection', function(ws) {
         {
             assets = message.substr(12).split(",");
             for (var i in assets) {
-                var asset = assets[i];
+                asset = assets[i];
                 if (currency[asset] !== undefined)
                 {
                     console.log(idx + ": Unubscribed to " + asset);
