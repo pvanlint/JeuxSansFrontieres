@@ -1,7 +1,5 @@
 var nr = require('newrelic');
 
-breaking change
-
 var port = 3001;
 if (process.argv.length > 2)
 {
