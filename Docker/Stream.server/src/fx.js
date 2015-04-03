@@ -47,9 +47,11 @@ function update(ccy, subs) {
 function updates() {
     var start = process.hrtime();
     for (var ccy in currency) {
-        //console.log("Updating: ", ccy);
-        var entry = currency[ccy];
-        currency[ccy].rate = update(ccy, entry.subs);
+        if (currency.hasOwnProperty(prop)) {
+            //console.log("Updating: ", ccy);
+            var entry = currency[ccy];
+            currency[ccy].rate = update(ccy, entry.subs);
+        }
     }
     var duration = process.hrtime(start)[1] / 1000000;
     t_update.sum += duration;
