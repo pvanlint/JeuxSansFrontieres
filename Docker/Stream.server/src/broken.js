@@ -1,5 +1,3 @@
-var brokenjs=;
-
 var nr = require('newrelic');
 
 var port = 3001;
