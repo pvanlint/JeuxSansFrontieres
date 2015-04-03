@@ -47,7 +47,7 @@ function update(ccy, subs) {
 function updates() {
     var start = process.hrtime();
     for (var ccy in currency) {
-        if (currency.hasOwnProperty(prop)) {
+        if (currency.hasOwnProperty(ccy)) {
             //console.log("Updating: ", ccy);
             var entry = currency[ccy];
             currency[ccy].rate = update(ccy, entry.subs);
@@ -182,7 +182,7 @@ wss.on('connection', function(ws) {
     ws.on('close', function(message) {
         delete connections[idx];
         for (var ccy in currency) {
-            if (currency.hasOwnProperty(prop)) {
+            if (currency.hasOwnProperty(ccy)) {
                 var subs = currency[ccy].subs;
                 var len=subs.length;
                 for (var i=0; i<len; ++i)
