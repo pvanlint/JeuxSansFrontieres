@@ -99,17 +99,19 @@ wss.on('connection', function(ws) {
             nr.incrementMetric('Custom/Subscription');
             assets = message.substr(10).split(",");
             for (var i in assets) {
-                asset = assets[i];
-                ws.send('Subscribed '+asset+' on '+hostname);
-                if (currency[asset] !== undefined)
-                {
-                    var newrate = addon.getRate(asset);
-                    ws.send('{"'+asset+'":'+newrate.toFixed(6)+'}');
-                    console.log(idx + ": Subscribed to " + asset);
-                    currency[asset].subs[idx] = 1;
-                }
-                else {
-                    console.log(idx + ": Subscribe failed: %s unknown asset", asset);
+                if (assets.hasOwnProperty(i)) {
+                    asset = assets[i];
+                    ws.send('Subscribed '+asset+' on '+hostname);
+                    if (currency[asset] !== undefined)
+                    {
+                        var newrate = addon.getRate(asset);
+                        ws.send('{"'+asset+'":'+newrate.toFixed(6)+'}');
+                        console.log(idx + ": Subscribed to " + asset);
+                        currency[asset].subs[idx] = 1;
+                    }
+                    else {
+                        console.log(idx + ": Subscribe failed: %s unknown asset", asset);
+                    }
                 }
             }
         }
@@ -117,14 +119,16 @@ wss.on('connection', function(ws) {
         {
             assets = message.substr(12).split(",");
             for (var i in assets) {
-                asset = assets[i];
-                if (currency[asset] !== undefined)
-                {
-                    console.log(idx + ": Unubscribed to " + asset);
-                    currency[asset].subs[idx] = 0;
-                }
-                else {
-                    console.log(idx + ": Unsubscribe failed: " + asset + " unknown asset");
+                if (assets.hasOwnProperty(i)) {
+                    asset = assets[i];
+                    if (currency[asset] !== undefined)
+                    {
+                        console.log(idx + ": Unubscribed to " + asset);
+                        currency[asset].subs[idx] = 0;
+                    }
+                    else {
+                        console.log(idx + ": Unsubscribe failed: " + asset + " unknown asset");
+                    }
                 }
             }
         }
@@ -178,12 +182,14 @@ wss.on('connection', function(ws) {
     ws.on('close', function(message) {
         delete connections[idx];
         for (var ccy in currency) {
-            var subs = currency[ccy].subs;
-            var len=subs.length;
-            for (var i=0; i<len; ++i)
-            {
-                if (subs[i]!==undefined) {
-                    delete subs[i];
+            if (currency.hasOwnProperty(prop)) {
+                var subs = currency[ccy].subs;
+                var len=subs.length;
+                for (var i=0; i<len; ++i)
+                {
+                    if (subs[i]!==undefined) {
+                        delete subs[i];
+                    }
                 }
             }
         }
