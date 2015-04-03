@@ -98,9 +98,9 @@ wss.on('connection', function(ws) {
         {
             nr.incrementMetric('Custom/Subscription');
             assets = message.substr(10).split(",");
-            for (var i in assets) {
-                if (assets.hasOwnProperty(i)) {
-                    asset = assets[i];
+            for (var i1 in assets) {
+                if (assets.hasOwnProperty(i1)) {
+                    asset = assets[i1];
                     ws.send('Subscribed '+asset+' on '+hostname);
                     if (currency[asset] !== undefined)
                     {
@@ -118,9 +118,9 @@ wss.on('connection', function(ws) {
         else if (message.substr(0, 12) === "Unsubscribe ")
         {
             assets = message.substr(12).split(",");
-            for (var i in assets) {
-                if (assets.hasOwnProperty(i)) {
-                    asset = assets[i];
+            for (var i2 in assets) {
+                if (assets.hasOwnProperty(i2)) {
+                    asset = assets[i2];
                     if (currency[asset] !== undefined)
                     {
                         console.log(idx + ": Unubscribed to " + asset);
