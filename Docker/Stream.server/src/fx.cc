@@ -12,7 +12,6 @@ typedef map<string, double> RateMap;
 
 RateMap fxrates;
 
-
 void getRate(const FunctionCallbackInfo<Value>& args) {
     Isolate* isolate = Isolate::GetCurrent();
     HandleScope scope(isolate);
