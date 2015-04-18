@@ -11,3 +11,4 @@ Demos:
 
 Check out quality report on CodeClimate
 [![Code Climate](https://codeclimate.com/repos/551b29d1e30ba036bf001aea/badges/db8a705815fbf06ae68c/gpa.svg)](https://codeclimate.com/repos/551b29d1e30ba036bf001aea/feed)
+Note the code climate free trial has now ended
